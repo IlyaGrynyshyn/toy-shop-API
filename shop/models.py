@@ -6,6 +6,7 @@ class Product(models.Model):
     """
     Model responsible for products
     """
+
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True)
     price = models.DecimalField(max_digits=5, decimal_places=2)
