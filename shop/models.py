@@ -13,12 +13,32 @@ def movie_image_file_path(instance, filename):
     return os.path.join("uploads/products/", filename)
 
 
+class Category(models.Model):
+    """
+    Model responsible for category products.
+    """
+
+    title = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255, unique=True)
+
+    class Meta:
+        verbose_name = "category"
+        verbose_name_plural = "categories"
+
+    def get_absolute_url(self):
+        kwargs = {
+            "category_slug": self.slug,
+        }
+        return reverse("category_detail", kwargs=kwargs)
+
+
 class Product(models.Model):
     """
     Model responsible for products
     """
 
     title = models.CharField(max_length=255)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=255, unique=True, editable=False)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     image = models.ImageField(null=True, upload_to=movie_image_file_path)
