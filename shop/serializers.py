@@ -10,3 +10,15 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = ("id", "title", "slug", "price", "image")
         model = Product
         lookup_field = "slug"
+
+
+class ProdcuctListSerializer(ProductSerializer): ...
+
+
+class ProdcutDetailSerializer(ProductSerializer): ...
+
+
+class ProductImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ("id", "image")
