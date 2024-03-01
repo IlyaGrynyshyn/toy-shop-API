@@ -31,6 +31,14 @@ class Category(models.Model):
         }
         return reverse("category_detail", kwargs=kwargs)
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        return super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
+
 
 class Product(models.Model):
     """
