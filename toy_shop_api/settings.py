@@ -139,6 +139,9 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+MEDIA_URL = "/media/"
+MEDIA_ROOT = "media/"
+
 AUTH_USER_MODEL = "customer.Customer"
 
 REST_FRAMEWORK = {
