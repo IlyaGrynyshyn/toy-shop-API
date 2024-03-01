@@ -27,6 +27,7 @@ class ProductViewSet(viewsets.ModelViewSet):
             return ProdcutDetailSerializer
         if self.action == "upload_image":
             return ProductImageSerializer
+        return self.serializer_class
 
     @action(
         methods=["POST"],
@@ -34,10 +35,10 @@ class ProductViewSet(viewsets.ModelViewSet):
         url_path="upload-image",
         permission_classes=[IsAdminUser],
     )
-    def upload_image(self, request, pk=None):
-        """Endpoint for uploading image to specific movie"""
-        movie = self.get_object()
-        serializer = self.get_serializer(movie, data=request.data)
+    def upload_image(self, request, slug=None):
+        """Endpoint for uploading image to specific product"""
+        products = self.get_object()
+        serializer = self.get_serializer(products, data=request.data)
 
         if serializer.is_valid():
             serializer.save()
