@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "customer",
     "shop",
+    "django_rest_passwordreset",
     "oauth2_provider",
     "social_django",
     "drf_social_oauth2",
@@ -181,6 +182,13 @@ SPECTACULAR_SETTINGS = {
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
