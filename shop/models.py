@@ -8,7 +8,7 @@ from pytils.translit import slugify
 
 def movie_image_file_path(instance, filename):
     _, extension = os.path.splitext(filename)
-    filename = f"{slugify(instance.title)}-{uuid.uuid4()}{extension}"
+    filename = f"{slugify(instance.product.title)}-{uuid.uuid4()}{extension}"
 
     return os.path.join("uploads/products/", filename)
 
@@ -66,3 +66,18 @@ class Product(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
+
+
+class ProductImage(models.Model):
+    """
+    Model responsible for product images
+    """
+
+    product = models.ForeignKey(Product, default=None, on_delete=models.CASCADE)
+    image = models.ImageField(null=True, blank=True, upload_to=movie_image_file_path)
+
+    def __str__(self):
+        return self.product.title
+
+    class Meta:
+        ordering = ["-id"]
