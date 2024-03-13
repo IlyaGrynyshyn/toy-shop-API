@@ -5,11 +5,11 @@ from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 
 
-from shop.models import Product, Category
+from shop.models import Product, Category, ProductImage
 from shop.permissions import IsAdminUserOrReadOnly
 from shop.serializers import (
     ProductSerializer,
-    ProdcutDetailSerializer,
+    ProductDetailSerializer,
     ProductImageSerializer,
     CategorySerializer,
 )
@@ -19,12 +19,10 @@ class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = [IsAdminUserOrReadOnly]
-    lookup_field = "slug"
 
 
 class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
-    lookup_field = "slug"
     permission_classes = [IsAdminUserOrReadOnly]
 
     def get_queryset(self):
@@ -38,7 +36,7 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     def get_serializer_class(self):
         if self.action == "retrieve":
-            return ProdcutDetailSerializer
+            return ProductDetailSerializer
         if self.action == "upload_image":
             return ProductImageSerializer
         return self.serializer_class
