@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
             model_name="product",
             name="image",
             field=models.ImageField(
-                null=True, upload_to=shop.models.movie_image_file_path
+                null=True, upload_to=shop.models.product_image_file_path
             ),
         ),
     ]

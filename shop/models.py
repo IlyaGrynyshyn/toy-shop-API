@@ -6,7 +6,7 @@ from django.urls import reverse
 from pytils.translit import slugify
 
 
-def movie_image_file_path(instance, filename):
+def product_image_file_path(instance, filename):
     _, extension = os.path.splitext(filename)
     filename = f"{slugify(instance.product.title)}-{uuid.uuid4()}{extension}"
 
@@ -49,7 +49,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=255, unique=True, editable=False)
     price = models.DecimalField(max_digits=5, decimal_places=2)
-    image = models.ImageField(null=True, upload_to=movie_image_file_path)
+    # image = models.ImageField(null=True, upload_to=prodcut_image_file_path)
 
     def __str__(self):
         return self.title
@@ -74,7 +74,7 @@ class ProductImage(models.Model):
     """
 
     product = models.ForeignKey(Product, default=None, on_delete=models.CASCADE)
-    image = models.ImageField(null=True, blank=True, upload_to=movie_image_file_path)
+    image = models.ImageField(null=True, blank=True, upload_to=product_image_file_path)
 
     def __str__(self):
         return self.product.title
