@@ -14,6 +14,15 @@ class CategorySerializer(serializers.ModelSerializer):
 class MaterialSerializer(serializers.ModelSerializer):
     class Meta:
         model = Material
+        fields = (
+            "id",
+            "name",
+        )
+
+
+class ProductMaterialSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Material
         fields = ("name",)
 
 
@@ -56,7 +65,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 class ProductDetailSerializer(ProductSerializer):
     category = CategorySerializer()
-    materials = MaterialSerializer(many=True, read_only=True)
+    materials = ProductMaterialSerializer(many=True, read_only=True)
 
     class Meta:
         model = Product
