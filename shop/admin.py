@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from shop.models import Product, Category, ProductImage
+from shop.models import Product, Category, ProductImage, Material
 
 
 class PhotoAdmin(admin.StackedInline):
@@ -31,3 +31,4 @@ class CategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(Material)
