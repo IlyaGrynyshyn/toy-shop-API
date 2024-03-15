@@ -41,23 +41,6 @@ class ProductViewSet(viewsets.ModelViewSet):
             return ProductImageSerializer
         return self.serializer_class
 
-    @action(
-        methods=["POST"],
-        detail=True,
-        url_path="upload-image",
-        permission_classes=[IsAdminUser],
-    )
-    def upload_image(self, request, slug=None):
-        """Endpoint for uploading image to specific product"""
-        products = self.get_object()
-        serializer = self.get_serializer(products, data=request.data)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
     @extend_schema(
         parameters=[
             OpenApiParameter(
