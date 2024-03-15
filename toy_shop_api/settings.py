@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     "customer",
     "shop",
     "django_rest_passwordreset",
+    "order",
 ]
 
 MIDDLEWARE = [
