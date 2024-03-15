@@ -5,13 +5,14 @@ from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 
 
-from shop.models import Product, Category, ProductImage
+from shop.models import Product, Category, ProductImage, Material
 from shop.permissions import IsAdminUserOrReadOnly
 from shop.serializers import (
     ProductSerializer,
     ProductDetailSerializer,
     ProductImageSerializer,
     CategorySerializer,
+    MaterialSerializer,
 )
 
 
@@ -52,3 +53,9 @@ class ProductViewSet(viewsets.ModelViewSet):
     )
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
+
+
+class MaterialsViewSet(viewsets.ModelViewSet):
+    queryset = Material.objects.all()
+    serializer_class = MaterialSerializer
+    permission_classes = [IsAdminUserOrReadOnly]
