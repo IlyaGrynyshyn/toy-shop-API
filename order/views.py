@@ -10,7 +10,6 @@ class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
     permission_classes = [IsAdminUserOrReadOnly]
 
-
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user)
 
