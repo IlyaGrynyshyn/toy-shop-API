@@ -47,9 +47,11 @@ class Product(models.Model):
 
     title = models.CharField(max_length=255)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    slug = models.SlugField(max_length=255, unique=True, editable=False)
+    slug = models.SlugField(max_length=255, unique=True)
     price = models.DecimalField(max_digits=5, decimal_places=2)
-    # image = models.ImageField(null=True, upload_to=prodcut_image_file_path)
+    description = models.TextField()
+    size = models.PositiveIntegerField()
+    materials = models.ManyToManyField("Material")
 
     def __str__(self):
         return self.title
@@ -60,12 +62,24 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Product"
         verbose_name_plural = "Products"
-        ordering = ["-id"]
+        ordering = ["id"]
 
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
+
+
+class Material(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Material"
+        verbose_name_plural = "Materials"
+        ordering = ["id"]
 
 
 class ProductImage(models.Model):
