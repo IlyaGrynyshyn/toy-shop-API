@@ -15,12 +15,12 @@ class ProductImageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProductImage
-        fields = ("id", "product", "image")
+        fields = ("image",)
 
 
 class ProductSerializer(serializers.ModelSerializer):
     slug = serializers.SlugField(read_only=True)
-    images = ProductImageSerializer(many=True, read_only=True)
+    images = ProductImageSerializer(many=True, read_only=True, source="product_images")
     uploaded_images = serializers.ListField(
         child=serializers.ImageField(
             max_length=1000000, allow_empty_file=False, use_url=False
