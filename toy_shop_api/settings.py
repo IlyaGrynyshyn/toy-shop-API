@@ -148,8 +148,11 @@ STATICFILES_DIRS = (BASE_DIR / "static",)
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media").replace("\\", "/")
+MEDIA_URL = "/media/"
 
 AUTH_USER_MODEL = "customer.Customer"
 
