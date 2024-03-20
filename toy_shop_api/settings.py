@@ -32,8 +32,8 @@ SECRET_KEY = os.getenv(
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = "RENDER" not in os.environ
-DEBUG = True
+DEBUG = "RENDER" not in os.environ
+# DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
@@ -152,6 +152,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media").replace("\\", "/")
+
 MEDIA_URL = "/media/"
 
 AUTH_USER_MODEL = "customer.Customer"
