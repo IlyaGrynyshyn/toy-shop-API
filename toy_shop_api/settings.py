@@ -33,7 +33,6 @@ SECRET_KEY = os.getenv(
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = "RENDER" not in os.environ
-# DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
@@ -51,6 +50,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "cloudinary_storage",
+    "cloudinary",
     "corsheaders",
     "rest_framework",
     "drf_spectacular",
@@ -62,6 +63,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -107,6 +109,12 @@ db_from_env = dj_database_url.config(
 )
 DATABASES["default"].update(db_from_env)
 
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": os.getenv("CLOUD_NAME"),
+    "API_KEY": os.getenv("API_KEY"),
+    "API_SECRET": os.getenv("API_SECRET"),
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -143,17 +151,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "static/"
-
-STATICFILES_DIRS = (BASE_DIR / "static",)
-
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "toy-shop/media/"
 
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "media").replace("\\", "/")
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.RawMediaCloudinaryStorage"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-MEDIA_URL = "/media/"
 
 AUTH_USER_MODEL = "customer.Customer"
 
