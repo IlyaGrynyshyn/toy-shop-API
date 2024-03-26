@@ -14,6 +14,7 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
+import dj_database_url
 from dotenv import load_dotenv
 
 load_dotenv()  # take environment variables from .env.
@@ -30,17 +31,6 @@ SECRET_KEY = os.getenv(
 )
 
 
-# SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = "RENDER" not in os.environ
-DEBUG = True
-
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
-
-RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -54,10 +44,10 @@ INSTALLED_APPS = [
     "cloudinary",
     "corsheaders",
     "rest_framework",
-    "django_rest_passwordreset",
     "drf_spectacular",
     "customer",
     "shop",
+    "django_rest_passwordreset",
     "order",
     "wishlist",
 ]
@@ -103,6 +93,13 @@ DATABASES = {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
+}
+
+
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": os.getenv("CLOUD_NAME"),
+    "API_KEY": os.getenv("API_KEY"),
+    "API_SECRET": os.getenv("API_SECRET"),
 }
 
 
