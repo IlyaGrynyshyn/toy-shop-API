@@ -48,7 +48,7 @@ class Product(models.Model):
     title = models.CharField(max_length=255)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=255, unique=True)
-    price = models.DecimalField(max_digits=5, decimal_places=2)
+    price = models.IntegerField()
     description = models.TextField()
     size = models.PositiveIntegerField()
     materials = models.ManyToManyField("Material")
@@ -90,7 +90,9 @@ class ProductImage(models.Model):
     product = models.ForeignKey(
         Product, default=None, on_delete=models.CASCADE, related_name="product_images"
     )
-    image = models.ImageField(null=True, blank=True, upload_to=product_image_file_path)
+    image = models.ImageField(
+        null=True, blank=True, upload_to=product_image_file_path, max_length=255
+    )
 
     def __str__(self):
         return self.product.title
