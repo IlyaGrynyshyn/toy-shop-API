@@ -48,7 +48,7 @@ class Product(models.Model):
     title = models.CharField(max_length=255)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     slug = models.SlugField(max_length=255, unique=True)
-    price = models.DecimalField(max_digits=5, decimal_places=2)
+    price = models.IntegerField()
     description = models.TextField()
     size = models.PositiveIntegerField()
     materials = models.ManyToManyField("Material")
