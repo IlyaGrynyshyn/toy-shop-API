@@ -90,7 +90,9 @@ class ProductImage(models.Model):
     product = models.ForeignKey(
         Product, default=None, on_delete=models.CASCADE, related_name="product_images"
     )
-    image = models.ImageField(null=True, blank=True, upload_to=product_image_file_path)
+    image = models.ImageField(
+        null=True, blank=True, upload_to=product_image_file_path, max_length=255
+    )
 
     def __str__(self):
         return self.product.title
