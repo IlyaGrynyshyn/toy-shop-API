@@ -42,6 +42,7 @@ class ProductSerializer(serializers.ModelSerializer):
         ),
         write_only=True,
     )
+    category = CategorySerializer(read_only=True)
 
     class Meta:
         model = Product

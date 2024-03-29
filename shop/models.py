@@ -96,4 +96,4 @@ class ProductImage(models.Model):
         return self.product.title
 
     class Meta:
-        ordering = ["-id"]
+        ordering = ["id"]
