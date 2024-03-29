@@ -8,15 +8,6 @@ CUSTOMER_CREATE_URL = reverse("customer:create")
 MANAGE_CUSTOMER_URL = reverse("customer:manage")
 
 
-class UserTestsData:
-    @classmethod
-    def setUpTestData(cls):
-        cls.user = Customer.objects.create(
-            email="test@test.com",
-            password="qwerty123",
-        )
-
-
 class CreateCustomerViewTests(APITestCase):
     def test_create_customer(self):
         url = CUSTOMER_CREATE_URL
@@ -35,9 +26,12 @@ class CreateCustomerViewTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
 
-class ManageUserViewTests(APITestCase, UserTestsData):
+class ManageUserViewTests(APITestCase):
     def setUp(self):
-        self.customer = self.user
+        self.customer = Customer.objects.create(
+            email="test@test.com",
+            password="qwerty123",
+        )
         self.access_token = AccessToken.for_user(self.customer)
         self.api_authentication()
 
@@ -48,7 +42,7 @@ class ManageUserViewTests(APITestCase, UserTestsData):
         url = MANAGE_CUSTOMER_URL
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data["email"], self.user.email)
+        self.assertEqual(response.data["email"], self.customer.email)
 
     def test_get_authenticated_user_unauthorized(self):
         self.client.credentials()
