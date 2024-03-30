@@ -55,11 +55,12 @@ INSTALLED_APPS = [
     "cloudinary",
     "corsheaders",
     "rest_framework",
+    "django_rest_passwordreset",
     "drf_spectacular",
     "customer",
     "shop",
-    "django_rest_passwordreset",
     "order",
+    "wishlist",
 ]
 
 MIDDLEWARE = [
@@ -105,10 +106,12 @@ DATABASES = {
     }
 }
 
+
 db_from_env = dj_database_url.config(
     conn_max_age=500,
 )
-DATABASES["default"].update(db_from_env)
+if os.getenv("RENDER"):
+    DATABASES["default"].update(db_from_env)
 
 CLOUDINARY_STORAGE = {
     "CLOUD_NAME": os.getenv("CLOUD_NAME"),
