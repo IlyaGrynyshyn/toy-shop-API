@@ -42,7 +42,8 @@ class ProductSerializer(serializers.ModelSerializer):
         ),
         write_only=True,
     )
-    category = CategorySerializer(read_only=True)
+    size = serializers.IntegerField(write_only=True)
+    description = serializers.CharField(read_only=True)
 
     class Meta:
         model = Product
@@ -53,6 +54,8 @@ class ProductSerializer(serializers.ModelSerializer):
             "images",
             "slug",
             "price",
+            "size",
+            "description",
             "uploaded_images",
         )
 
