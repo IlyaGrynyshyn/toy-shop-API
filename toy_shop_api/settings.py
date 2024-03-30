@@ -53,11 +53,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "corsheaders",
     "rest_framework",
+    "django_rest_passwordreset",
     "drf_spectacular",
     "customer",
     "shop",
-    "django_rest_passwordreset",
     "order",
+    "wishlist",
 ]
 
 MIDDLEWARE = [
