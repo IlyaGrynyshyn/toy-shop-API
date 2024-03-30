@@ -23,6 +23,7 @@ urlpatterns = [
         include("django_rest_passwordreset.urls", namespace="password_reset"),
     ),
     path("api/user/", include("order.urls")),
+    path("api/shop/", include("wishlist.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
