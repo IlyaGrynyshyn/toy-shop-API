@@ -22,6 +22,7 @@ urlpatterns = [
         "api/user/password_reset/",
         include("django_rest_passwordreset.urls", namespace="password_reset"),
     ),
+    path("api/user/", include("customer.urls")),
     path("api/user/", include("order.urls")),
     path("api/user/", include("wishlist.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
