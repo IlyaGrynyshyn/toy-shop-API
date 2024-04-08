@@ -10,7 +10,6 @@ from drf_spectacular.views import (
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/user/", include("customer.urls")),
     path("api/shop/", include("shop.urls")),
     path("api/doc/", SpectacularAPIView.as_view(), name="schema"),
     path(
@@ -22,8 +21,9 @@ urlpatterns = [
         "api/user/password_reset/",
         include("django_rest_passwordreset.urls", namespace="password_reset"),
     ),
+    path("api/user/", include("customer.urls")),
     path("api/user/", include("order.urls")),
-    path("api/shop/", include("wishlist.urls")),
+    path("api/user/", include("wishlist.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
