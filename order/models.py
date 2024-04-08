@@ -7,6 +7,8 @@ from shop.models import Product
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
+    delivery_city = models.CharField(max_length=100)
+    delivery_warehouse = models.CharField(max_length=100)
 
     def __str__(self):
         return f"{self.user.email} - {self.created_at}"
