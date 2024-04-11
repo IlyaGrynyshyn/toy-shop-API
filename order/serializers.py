@@ -1,3 +1,6 @@
+import string
+import random
+
 from django.db import transaction
 from rest_framework import serializers
 
@@ -13,6 +16,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     order_items = OrderItemSerializer(many=True)
     total_price = serializers.SerializerMethodField()
+    track_number = serializers.SerializerMethodField()
 
     class Meta:
         model = Order
@@ -22,6 +26,7 @@ class OrderSerializer(serializers.ModelSerializer):
             "delivery_city",
             "delivery_warehouse",
             "total_price",
+            "track_number",
             "created_at",
         )
 
@@ -31,6 +36,15 @@ class OrderSerializer(serializers.ModelSerializer):
         for order_item in obj.order_items.all():
             total_price += order_item.price
         return total_price
+
+    def get_track_number(self, obj):
+        """It's just a plug for field track number"""
+        available_characters = string.digits
+        tracking_number = "".join(
+            random.choice(available_characters) for _ in range(16)
+        )
+
+        return tracking_number
 
     @transaction.atomic()
     def create(self, validated_data):

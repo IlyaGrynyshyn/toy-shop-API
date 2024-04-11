@@ -9,6 +9,7 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     delivery_city = models.CharField(max_length=100)
     delivery_warehouse = models.CharField(max_length=100)
+    track_number = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return f"{self.user.email} - {self.created_at}"
