@@ -25,6 +25,7 @@ urlpatterns = [
     path("api/user/", include("customer.urls")),
     path("api/user/", include("order.urls")),
     path("api/user/", include("wishlist.urls")),
+    path("api/user/social-auth/", include("social_auth.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
