@@ -1,22 +1,18 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from customer.managers import UserManager
 
+AUTH_PROVIDERS = {"facebook": "facebook", "google": "google", "email": "email"}
+
 
 class Customer(AbstractUser):
-    REGISTRATION_CHOICES = [
-        ('email', 'Email'),
-        ('google', 'Google'),
-    ]
-
     username = None
     email = models.EmailField(_("email address"), unique=True)
-    registration_method = models.CharField(
-        max_length=10,
-        choices=REGISTRATION_CHOICES,
-        default='email'
+    auth_provider = models.CharField(
+        max_length=255, blank=False, null=False, default=AUTH_PROVIDERS.get("email")
     )
 
     USERNAME_FIELD = "email"
