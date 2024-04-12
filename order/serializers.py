@@ -25,7 +25,6 @@ class OrderSerializer(serializers.ModelSerializer):
             "order_items",
             "first_name",
             "last_name",
-            "middle_name",
             "phone_number",
             "delivery_warehouse",
             "total_price",
