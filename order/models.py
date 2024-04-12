@@ -9,6 +9,7 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
+    middle_name = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=50)
     delivery_city = models.CharField(max_length=100)
     delivery_warehouse = models.CharField(max_length=100)
