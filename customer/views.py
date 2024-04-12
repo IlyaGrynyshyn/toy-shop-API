@@ -1,8 +1,9 @@
+from django.contrib.auth import get_user_model
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
-from customer.serializers import CustomerSerializer
+from customer.serializers import CustomerSerializer, ChangePasswordSerializer
 
 
 class CreateCustomerView(generics.CreateAPIView):
@@ -20,3 +21,9 @@ class ManageUserView(generics.RetrieveUpdateAPIView):
 
     def get_object(self):
         return self.request.user
+
+
+class ChangePasswordViewSet(generics.UpdateAPIView):
+    queryset = get_user_model()
+    serializer_class = ChangePasswordSerializer
+    permission_classes = [IsAuthenticated]
