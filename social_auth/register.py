@@ -38,7 +38,9 @@ def register_social_user(
         user.is_verified = True
         user.auth_provider = provider
         user.save()
-        new_user = authenticate(email=email, password=settings.SOCIAL_SECRET)
+        new_user = authenticate(
+            email=email, password=settings.SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET
+        )
         return {
             "email": new_user.email,
             "tokens": new_user.tokens(),
