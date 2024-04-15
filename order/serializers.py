@@ -23,6 +23,10 @@ class OrderSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "order_items",
+            "first_name",
+            "last_name",
+            "middle_name",
+            "phone_number",
             "delivery_city",
             "delivery_warehouse",
             "total_price",

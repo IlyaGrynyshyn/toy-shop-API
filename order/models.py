@@ -7,6 +7,10 @@ from shop.models import Product
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    middle_name = models.CharField(max_length=50)
+    phone_number = models.CharField(max_length=50)
     delivery_city = models.CharField(max_length=100)
     delivery_warehouse = models.CharField(max_length=100)
     track_number = models.CharField(max_length=100, blank=True, null=True)
