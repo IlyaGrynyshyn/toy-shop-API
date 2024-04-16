@@ -17,7 +17,9 @@ def register_social_user(
 
     if get_user_by_email.exists():
         if provider == get_user_by_email.first().auth_provider:
-            registered_user = authenticate(email=email, password=settings.SOCIAL_SECRET)
+            registered_user = authenticate(
+                email=email, password=settings.SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET
+            )
             return {
                 "email": registered_user.email,
                 "tokens": registered_user.tokens(),
