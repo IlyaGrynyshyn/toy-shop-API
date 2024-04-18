@@ -26,10 +26,7 @@ def password_reset_token_created(
         "current_user": reset_password_token.user,
         "first_name": reset_password_token.user.first_name,
         "email": reset_password_token.user.email,
-        "reset_password_url": "{}?token={}".format(
-            settings.FRONTEND_URL,
-            reset_password_token.key,
-        ),
+        "reset_password_url": f"{settings.FRONTEND_URL}/new-password/?token={reset_password_token.key}",
     }
     print(context)
 
