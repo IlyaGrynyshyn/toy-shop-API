@@ -30,6 +30,7 @@ SECRET_KEY = os.getenv(
     "SECRET_KEY", "django-insecure-=03e%!u89bj%i5tryvjb$(lnz25arjngknq_wodci7m&-a-zm#"
 )
 
+FRONTEND_URL = os.getenv("FRONTEND_URL")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = "RENDER" not in os.environ
