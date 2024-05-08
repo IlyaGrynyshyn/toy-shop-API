@@ -69,6 +69,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 class ProductDetailSerializer(ProductSerializer):
     category = CategorySerializer()
+    size = serializers.IntegerField()
     materials = ProductMaterialSerializer(many=True, read_only=True)
 
     class Meta:
